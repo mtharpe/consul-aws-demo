@@ -39,4 +39,4 @@ sudo tee /etc/hostname > /dev/null <<"EOF"
 ${hostname}
 EOF
 echo "127.0.0.1 ${hostname}" >> /etc/hosts
-sudo hostname -F ${hostname}
+sudo hostname -F /etc/hostname
