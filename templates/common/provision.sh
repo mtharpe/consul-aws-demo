@@ -33,3 +33,9 @@ sudo tee /etc/motd > /dev/null <<"EOF"
                                                   
 Hello ${namespace}! And yes, all demos should be done live.                                                
 EOF
+
+echo "Setting hostname....."
+sudo tee /etc/hostname > /dev/null <<"EOF"
+${hostname}
+EOF
+echo "127.0.0.1 ${hostname}" >> /etc/hosts

@@ -7,6 +7,7 @@ ${file("${path.module}/templates/consul-server.sh")}
 EOF
 
   vars {
+    hostname            = "consul-${var.datacenter}-${count.index+1}"
     username            = "${var.username}"
     namespace           = "${var.namespace}"
     consul_server_count = "${var.consul_server_count}"
