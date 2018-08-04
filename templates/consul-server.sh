@@ -29,7 +29,7 @@ ExecStart=/usr/local/bin/consul agent \
   -advertise=ADVERTISE_ADDR \
   -datacenter=${datacenter} \
   -bind=0.0.0.0 \
-  -bootstrap-expect 3 \
+  -bootstrap-expect ${consul_server_count} \
   -retry-join "provider=aws tag_key=${retry_join_tag} tag_value=${retry_join_tag}" \
   -client=0.0.0.0 \
   -data-dir=/var/lib/consul \

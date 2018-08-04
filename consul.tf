@@ -7,11 +7,12 @@ ${file("${path.module}/templates/consul-server.sh")}
 EOF
 
   vars {
-    username       = "${var.username}"
-    namespace      = "${var.namespace}"
-    consul_version = "${var.consul_version}"
-    datacenter     = "${var.datacenter}"
-    retry_join_tag = "${var.retry_join_tag}"
+    username            = "${var.username}"
+    namespace           = "${var.namespace}"
+    consul_server_count = "${var.consul_server_count}"
+    consul_version      = "${var.consul_version}"
+    datacenter          = "${var.datacenter}"
+    retry_join_tag      = "${var.retry_join_tag}"
   }
 }
 
