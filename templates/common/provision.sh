@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export IP_ADDRESS=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
+
 echo "Configuring user....."
 sudo mkdir -p "/home/${username}/.cache"
 sudo touch "/home/${username}/.cache/motd.legal-displayed"
@@ -38,5 +40,8 @@ echo "Setting hostname....."
 sudo tee /etc/hostname > /dev/null <<"EOF"
 ${hostname}
 EOF
-echo "127.0.0.1 ${hostname}" >> /etc/hosts
 sudo hostname -F /etc/hostname
+sudo tee -a /etc/hosts > /dev/null <<EOF
+# For local resolution
+$IP_ADDRESS  ${hostname}
+EOF
