@@ -28,7 +28,7 @@ resource "aws_instance" "consul_server" {
   user_data = "${element(data.template_file.consul_server.*.rendered, count.index)}"
 
   tags {
-    Name = "consul-${var.datacenter}-${count.index+1}"
+    Name   = "consul-${var.datacenter}-${count.index+1}"
     consul = "${var.retry_join_tag}"
   }
 }
