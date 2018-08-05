@@ -36,10 +36,10 @@ resource "aws_instance" "consul_server" {
 }
 
 # Outputs
-output "consul_server_ips" {
+output "server_ips" {
   value = "${aws_instance.consul_server.*.public_ip}"
 }
 
-output "consul_server_instance_ids" {
+output "server_instance_ids" {
   value = "${aws_instance.consul_server.*.id}"
 }
