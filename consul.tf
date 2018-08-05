@@ -39,3 +39,7 @@ resource "aws_instance" "consul_server" {
 output "consul_server_ips" {
   value = "${aws_instance.consul_server.*.public_ip}"
 }
+
+output "consul_server_instance_ids" {
+  value = "${aws_instance.consul_server.*.id}"
+}
