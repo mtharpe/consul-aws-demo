@@ -8,6 +8,7 @@ apt-get install -y unzip dnsmasq
 
 ## Setup consul
 mkdir -p /var/lib/consul
+mkdir -p /etc/consul.d
 
 curl \
   --silent \
@@ -17,6 +18,13 @@ curl \
 unzip consul.zip
 mv consul /usr/local/bin/consul
 rm consul.zip
+
+# Register web service
+sudo tee /etc/consul.d/server.hcl > /dev/null <<"EOF"
+connect {
+  enabled = true
+}
+EOF
 
 cat > consul.service <<'EOF'
 [Unit]
@@ -33,6 +41,7 @@ ExecStart=/usr/local/bin/consul agent \
   -retry-join "provider=aws tag_key=${retry_join_tag} tag_value=${retry_join_tag}" \
   -client=0.0.0.0 \
   -data-dir=/var/lib/consul \
+  -config-dir=/etc/consul.d \
   -server \
   -ui
 
