@@ -1,8 +1,9 @@
 provider "aws" {
-  region = "${var.region}"
+  region = var.region
 }
 
-data "aws_availability_zones" "available" {}
+data "aws_availability_zones" "available" {
+}
 
 # Get the list of official Canonical Ubuntu 16.04 AMIs
 data "aws_ami" "ubuntu-1604" {
@@ -40,6 +41,7 @@ resource "aws_iam_role" "consul-retry-join" {
   ]
 }
 POLICY
+
 }
 
 # Create the policy
@@ -59,17 +61,19 @@ resource "aws_iam_policy" "consul-retry-join" {
   ]
 }
 POLICY
+
 }
 
 # Attach the policy
 resource "aws_iam_policy_attachment" "consul-retry-join" {
   name       = "${var.namespace}-consul-retry-join"
-  roles      = ["${aws_iam_role.consul-retry-join.name}"]
-  policy_arn = "${aws_iam_policy.consul-retry-join.arn}"
+  roles      = [aws_iam_role.consul-retry-join.name]
+  policy_arn = aws_iam_policy.consul-retry-join.arn
 }
 
 # Create the instance profile
 resource "aws_iam_instance_profile" "consul-retry-join" {
   name = "${var.namespace}-consul-retry-join"
-  role = "${aws_iam_role.consul-retry-join.name}"
+  role = aws_iam_role.consul-retry-join.name
 }
+
