@@ -21,7 +21,7 @@ variable "instance_type" {
 }
 
 variable "subnet_ids" {
-  type = "list"
+  type = list(string)
 }
 
 variable "vpc_security_group_ids" {
@@ -44,3 +44,4 @@ variable "retry_join_tag" {
 variable "username" {
   default = "ubuntu"
 }
+
