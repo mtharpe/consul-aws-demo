@@ -5,6 +5,15 @@ provider "aws" {
 data "aws_availability_zones" "available" {
 }
 
+data "aws_subnet_ids" "vpc_id" {
+  vpc_id = aws_default_vpc.default.id
+}
+
+data "aws_subnet" "subnet_ids" {
+  for_each = data.aws_subnet_ids.vpc_id.ids
+  id       = each.value
+}
+
 # Get the list of official Canonical Ubuntu 16.04 AMIs
 data "aws_ami" "ubuntu-1604" {
   most_recent = true
@@ -20,6 +29,12 @@ data "aws_ami" "ubuntu-1604" {
   }
 
   owners = ["099720109477"] # Canonical
+}
+
+resource "aws_default_vpc" "default" {
+  tags = {
+    Name = "Default VPC"
+  }
 }
 
 # Create an IAM role for the auto-join
