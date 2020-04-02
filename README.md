@@ -1,5 +1,8 @@
+![Terraform GitHub Actions](https://github.com/mtharpe/consul-aws-demo/workflows/Terraform%20GitHub%20Actions/badge.svg)
+
 # consul-aws
 A simple terraform module to spin up a consul cluster on aws.
+
 ## Requirements
 
 The following requirements are needed by this module:
