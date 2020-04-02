@@ -24,7 +24,7 @@ resource "aws_instance" "consul_server" {
   instance_type = var.instance_type
   key_name      = var.key_name
 
-  iam_instance_profile   = aws_iam_instance_profile.consul-retry-join.name
+  iam_instance_profile = aws_iam_instance_profile.consul-retry-join.name
   # subnet_id              = element(var.subnet_ids, count.index % length(var.subnet_ids))
   subnet_id              = [for s in data.aws_subnet.subnet_ids : s.cidr_block]
   vpc_security_group_ids = [var.vpc_security_group_ids]
